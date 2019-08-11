@@ -20,11 +20,13 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColour;
-  Color femaleCardColour = inactiveCardColour;
+  Gender selectedGender;
+
+//  Color maleCardColor = inactiveCardColour;
+//  Color femaleCardColour = inactiveCardColour;
 
   //1 male, 2 female
-  void updateColour(Gender selectedGender) {
+  /* void updateColour(Gender selectedGender) {
     // Male card
     if (selectedGender == Gender.male) {
       if (maleCardColor == inactiveCardColour) {
@@ -45,6 +47,8 @@ class _InputPageState extends State<InputPage> {
     }
   }
 
+  */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,11 +64,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        updateColour(Gender.male);
+                        selectedGender = Gender.male;
                       });
                     },
                     child: ReusableCard(
-                      colour: maleCardColor,
+                      colour: selectedGender == Gender.male
+                          ? widgetColor
+                          : inactiveCardColour,
                       cardChild: ReusableChild(
                           icon: FontAwesomeIcons.mars, text: 'MALE'),
                     ),
@@ -74,11 +80,13 @@ class _InputPageState extends State<InputPage> {
                     child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      updateColour(Gender.female);
+                      selectedGender = Gender.female;
                     });
                   },
                   child: ReusableCard(
-                    colour: femaleCardColour,
+                    colour: selectedGender == Gender.female
+                        ? widgetColor
+                        : inactiveCardColour,
                     cardChild: ReusableChild(
                         icon: FontAwesomeIcons.venus, text: 'FEMALE'),
                   ),
