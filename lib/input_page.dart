@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const bottomContainerHeight = 80.0;
 const widgetColor = 0xFF1D1E33;
@@ -24,6 +25,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     colour: Color(widgetColor),
+                    cardChild: ReusableChild(),
                   ),
                 ),
                 Expanded(
@@ -57,6 +59,35 @@ class _InputPageState extends State<InputPage> {
                 height: bottomContainerHeight)
           ],
         ));
+  }
+}
+
+class ReusableChild extends StatelessWidget {
+  const ReusableChild({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Icon(
+          FontAwesomeIcons.mars,
+          size: 80,
+        ),
+        SizedBox(
+          height: 15.0,
+        ),
+        Text(
+          'MALE',
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Color(0xFF8D8E98),
+          ),
+        )
+      ],
+    );
   }
 }
 
