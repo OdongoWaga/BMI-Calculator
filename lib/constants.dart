@@ -11,3 +11,7 @@ const kInactiveCardColour = Color(0xFF111328);
 const kBottomColor = Color(0xFFEB1555);
 
 const kNumberTextStyle = TextStyle(fontSize: 50, fontWeight: FontWeight.w900);
+const kLargeButtonTextStyle =
+    TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold);
+const kTitleTextStyle = TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold);
+const kTitleTextStyle = TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold);
