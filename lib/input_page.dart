@@ -3,11 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'icon_content.dart';
 import 'reusable_card.dart';
-
-const bottomContainerHeight = 80.0;
-const widgetColor = Color(0xFF1D1E33);
-const inactiveCardColour = Color(0xFF111328);
-const bottomColor = Color(0xFFEB1555);
+import 'constants.dart';
 
 enum Gender {
   male,
@@ -21,6 +17,8 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
+  int height = 180;
+  int weight = 60;
 
 //  Color maleCardColor = inactiveCardColour;
 //  Color femaleCardColour = inactiveCardColour;
@@ -56,66 +54,138 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: selectedGender == Gender.male
-                          ? widgetColor
-                          : inactiveCardColour,
-                      cardChild: ReusableChild(
-                          icon: FontAwesomeIcons.mars, text: 'MALE'),
-                    ),
+                    colour: selectedGender == Gender.male
+                        ? kWidgetColor
+                        : kInactiveCardColour,
+                    cardChild: ReusableChild(
+                        icon: FontAwesomeIcons.mars, text: 'MALE'),
                   ),
                 ),
                 Expanded(
-                    child: GestureDetector(
-                  onTap: () {
+                    child: ReusableCard(
+                  onPress: () {
                     setState(() {
                       selectedGender = Gender.female;
                     });
                   },
-                  child: ReusableCard(
-                    colour: selectedGender == Gender.female
-                        ? widgetColor
-                        : inactiveCardColour,
-                    cardChild: ReusableChild(
-                        icon: FontAwesomeIcons.venus, text: 'FEMALE'),
-                  ),
+                  colour: selectedGender == Gender.female
+                      ? kWidgetColor
+                      : kInactiveCardColour,
+                  cardChild: ReusableChild(
+                      icon: FontAwesomeIcons.venus, text: 'FEMALE'),
                 )),
               ],
             )),
             Expanded(
                 child: ReusableCard(
-              colour: widgetColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(height.toString(), style: kNumberTextStyle),
+                      Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      )
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                        inactiveTrackColor: Color(0xFF8D8E98),
+                        activeTrackColor: Colors.white,
+                        thumbColor: Color(0xFFEB1555),
+                        overlayColor: Color(0x29EB1555),
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 30)),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120.00,
+                      max: 220.00,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              colour: kWidgetColor,
             )),
             Expanded(
                 child: Row(
               children: <Widget>[
                 Expanded(
                     child: ReusableCard(
-                  colour: widgetColor,
+                  colour: kWidgetColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'WEIGHT',
+                        style: kLabelTextStyle,
+                      ),
+                      Text(
+                        weight.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          FloatingActionButton(
+                            backgroundColor: Color(0xFF4C4F5E),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          FloatingActionButton(
+                            backgroundColor: Color(0xFF4C4F5E),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 )),
                 Expanded(
                   child: ReusableCard(
-                    colour: widgetColor,
+                    colour: kWidgetColor,
                   ),
                 ),
               ],
             )),
             Container(
-                color: bottomColor,
+                color: kBottomColor,
                 margin: EdgeInsets.only(top: 10.0),
                 width: double.infinity,
-                height: bottomContainerHeight)
+                height: kBottomContainerHeight)
           ],
         ));
   }
